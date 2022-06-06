@@ -36,13 +36,17 @@ public class UserController {
         return userService.queryById(id);
     }
 
-//    @Value("${pattern.dateformat}")
-//    public String dateformat;
+    /*@Value("${pattern.dateformat}")
+    public String dateformat;*/
 
     @GetMapping("now")
     public String now(){
-//        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(dateformat));
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern(properties.getDateformat()));
+    }
+
+    @GetMapping("prop")
+    public PatternProperties getProperties(){
+        return properties;
     }
 
 
