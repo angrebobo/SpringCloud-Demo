@@ -18,12 +18,17 @@ public class OrderService {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private UserClient userClient;
+
     public Order queryOrderById(Long orderId) {
         // 1.查询订单
         Order order = orderMapper.findById(orderId);
 
-        String url = "http://userservice/user/" + order.getUserId();
-        User user = restTemplate.getForObject(url, User.class);
+        /*String url = "http://userservice/user/" + order.getUserId();
+        User user = restTemplate.getForObject(url, User.class);*/
+
+        User user = userClient.findById(order.getUserId());
         order.setUser(user);
 
         return order;
